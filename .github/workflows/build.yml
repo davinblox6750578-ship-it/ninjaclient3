@@ -1,0 +1,35 @@
+
+name: Build NinjaClient
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: current
+
+      - name: Extract ZIP
+        run: unzip -q ninjaclient-corrigido.zip -d source
+
+      - name: Build JAR
+        run: |
+          cd source/ninjaclient
+          gradle build --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NinjaClient-JAR
+          path: source/ninjaclient/build/libs/*.jar
+          

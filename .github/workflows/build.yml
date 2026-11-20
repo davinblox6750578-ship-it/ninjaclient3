@@ -20,7 +20,7 @@ jobs:
           gradle-version: current
 
       - name: Extract ZIP
-        run: unzip -q ninjaclient-corrigido.zip -d source
+        run: unzip -q ninjaclient-corrigido-v2.zip -d source
 
       - name: Configure Fabric
         run: |
